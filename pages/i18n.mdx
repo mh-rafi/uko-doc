@@ -1,0 +1,90 @@
+### Internationalization
+
+Multiple languages feature is an important for your app. To have this enabled the app uses [i18next](https://www.i18next.com).
+
+### How it works?
+
+-At first, i18next library needs a config and initialization file, in this case, _`src/i18n`_ file.
+
+```js i18n/index.js
+import i18next from "i18next";
+import { initReactI18next } from "react-i18next";
+
+const resources = {
+  en: {
+    translation: {
+      "Bounce Rate": "Bounce Rate",
+      "Session Duration": "Session Duration",
+      "Live Online User": "Live Online User",
+      "Page views": "Page views",
+      "Visits by Top Referral Source": "Visits by Top Referral Source",
+      "Session by browser": "Session by browser",
+      "View Details": "View Details",
+    },
+  },
+  es: {
+    translation: {
+      "Bounce Rate": "Porcentaje",
+      "Session Duration": "Duración de la sesión",
+      "Live Online User": "Usuario en línea en vivo",
+      "Page views": "Visitas a la página",
+      "Visits by Top Referral Source":
+        "Visitas por principal fuente de referencia",
+      "Session by browser": "Sesión por navegador",
+      "View Details": "Ver detalles",
+    },
+  },
+};
+
+i18next.use(initReactI18next).init({
+  resources,
+  lng: "en",
+  fallbackLng: "en",
+  interpolation: { escapeValue: false },
+});
+```
+
+- Thereupon, Import initialization file in the `App.jsx` then i18next added globally in your projects. `(In nextjs version import in the src/app/layout.jsx)`
+
+```jsx App.jsx mark=2,5,7
+import { useTranslation } from "react-i18next";
+import "./i18n";
+
+const App = () => {
+  const { t } = useTranslation();
+
+  return <h1>{t("Bounce Rate")}</h1>;
+};
+
+export default App;
+```
+
+### How to remove?
+
+- At first, Remove i18n import file from _`src/App.jsx`_ component `(In nextjs version remove from src/app/layout.jsx)`
+
+```jsx App.jsx mark=2
+import { useTranslation } from "react-i18next";
+import "./i18n"; // REMOVE THIS LINE
+
+const App = () => {
+  const { t } = useTranslation();
+
+  return <h1>{t("Bounce Rate")}</h1>;
+};
+
+export default App;
+```
+
+- After that, Delete the _`src/components/i18n`_ folder from app
+- At last, Uninstall dependecies i18next and [react-i18next](https://react.i18next.com/getting-started)
+
+```bash copy
+npm uninstall i18next react-i18next
+```
+
+or
+
+```bash copy
+yarn remove i18next react-i18next
+```

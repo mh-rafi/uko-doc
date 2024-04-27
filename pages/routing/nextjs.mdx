@@ -1,0 +1,29 @@
+### Route Configuration
+
+Using a file-system-based router, Next.js allows for:
+
+Routes are defined using folders. A route is a single path made up of nested folders that follows the file-system hierarchy from the root folder all the way down to the leaf folder that contains the _`page.js`_ file. Check out Defining Routes.
+
+The user interface (UI) displayed for a route segment is made using files. View the unique files.
+
+For better understanding, please read the nextjs routing documentation:
+
+- https://nextjs.org/docs/app/building-your-application/routing
+
+### How to add a new page?
+
+Inside the `app folder`, make a new folder, and inside that folder, make a file _`page.jsx.`_
+
+```js app/about/page.jsx
+const About = () => {
+  return (
+    <div>
+      <h1>This is About Page</h1>
+    </div>
+  );
+};
+```
+
+### Reference
+
+- https://nextjs.org/docs/app/building-your-application/routing

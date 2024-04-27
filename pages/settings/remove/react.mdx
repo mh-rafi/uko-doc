@@ -1,0 +1,95 @@
+### How to remove site settings from app?
+
+- At first, Remove _`SettingsProvider`_ wrapper component from _`index.jsx`_ root file.
+- After that, Remove _`useSettings`_ hook & settings argument from _`createCustomTheme`_ function
+- After that, Copy the code from below [step-3](#step-3) and paste it _`createCustomTheme`_ function
+
+### Step 1
+
+```js src/index.jsx
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+
+### Step 2
+
+```js src/App.jsx mark=2,3
+const App = () => {
+  //   const { settings } = useSettings();
+  //   const theme = createCustomTheme(settings);
+
+  const theme = createCustomTheme();
+  // ROUTER CREATE
+  const router = createBrowserRouter(routes());
+
+  return (
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <AuthProvider>
+            <RTL>
+              <CssBaseline />
+              <RouterProvider router={router} />
+            </RTL>
+          </AuthProvider>
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </LocalizationProvider>
+  );
+};
+```
+
+### Step 3
+
+```js theme/index.jsx mark=34:46,3:30
+// REMOVE THIS CODE
+
+// export const createCustomTheme = (settings) => {
+//   /**
+//    * settings.theme value is 'light' or 'dark'
+//    * update settings in contexts/settingsContext.jsx
+//    */
+//   let themeOptions = themesOptions[settings.theme];
+
+//   if (!themeOptions) {
+//     themeOptions = themesOptions[THEMES.LIGHT];
+//   }
+
+//   const mergedThemeOptions = merge({}, baseOptions, themeOptions, {
+//     direction: settings.direction,
+//   });
+
+//   let theme = createTheme(mergedThemeOptions as ThemeOptions);
+
+//   // set shadows
+//   theme.shadows = shadows(theme);
+//   // set components
+//   theme.components = componentsOverride(theme);
+
+//   if (settings.responsiveFontSizes) {
+//     theme = responsiveFontSizes(theme);
+//   }
+
+//   return theme;
+// };
+
+// ADD THIS CODE
+
+export const createCustomTheme = () => {
+  let themeOptions = themesOptions[THEMES.LIGHT];
+
+  const mergedThemeOptions = merge({}, baseOptions, themeOptions);
+
+  let theme = createTheme(mergedThemeOptions);
+
+  // set shadows
+  theme.shadows = shadows(theme);
+  // set components
+  theme.components = componentsOverride(theme);
+
+  return theme;
+};
+```

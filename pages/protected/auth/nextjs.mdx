@@ -1,0 +1,46 @@
+### How to work ?
+
+A private route can be protected using this _`AuthGuard`_ component. It decides whether to permit navigation to a requested route.
+
+```js AuthGuard.jsx
+"use client";
+
+import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import useAuth from "hooks/useAuth";
+
+const AuthGuard = ({ children }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { isAuthenticated } = useAuth();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (!isAuthenticated) router.replace("/login");
+    else setIsLoggedIn(true);
+  }, [isAuthenticated]);
+
+  if (isLoggedIn) return <>{children}</>;
+
+  return <Loading />;
+};
+
+export default AuthGuard;
+```
+
+### How to use it ?
+
+```js layout.jsx
+import { AuthGuard } from "components/auth";
+import DashboardLayout from "layouts/dashboard/DashboardLayout";
+
+const Layout = ({ children }) => {
+  return (
+    <AuthGuard>
+      <DashboardLayout>{children}</DashboardLayout>
+    </AuthGuard>
+  );
+};
+
+export default Layout;
+```

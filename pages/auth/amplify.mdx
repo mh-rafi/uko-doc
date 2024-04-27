@@ -1,0 +1,83 @@
+### How to use Amplify ?
+
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/9aTv4yR5yrc"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
+
+_`Note:`_ The uko template uses the firebase authentication system by default.
+
+- Step-1 : Create an AWS account first if you don't already have one. After that, follow this documentation: https://docs.amplify.aws/lib/project-setup/prereq/q/platform/js/#configure-the-amplify-cli
+
+- [Step-2](#step-2) : After completing amplify setup, Open the _`src/hooks/useAuth.js`_ file. Thereupon, import the AuthContext from _`src/contexts/amplifyContext`_ then pass it as an argument in the useContext hook.
+
+- [Step-3](#step-3) : Call the useAuth hook inside AuthGuard, GuestGuard components, Login, Register page etc.
+
+### Step 2
+
+```js mark=1,3[34:44]
+import { AuthContext } from "contexts/amplifyContext";
+
+const useAuth = () => useContext(AuthContext);
+export default useAuth;
+```
+
+### Step 3
+
+```js login.jsx
+import useAuth from "hooks/useAuth";
+
+const Login = () => {
+  const { login } = useAuth();
+
+  const onLogin = async () => {
+    await login("example@email.com", "pass123"); // Login crediential
+  };
+
+  return (
+    <Box>
+      <Button onClick={onLogin}>Login</Button>
+    </Box>
+  );
+};
+
+export default Login;
+```
+
+```js profile.jsx
+import useAuth from "hooks/useAuth";
+
+const Profile = () => {
+  const { user, isAuthenticated, logout } = useAuth();
+
+  if (isAuthenticated && user) {
+    return (
+      <Box>
+        <Typography>Email : {user.email}</Typography>
+        <Button onClick={logout}>logout</Button>
+      </Box>
+    );
+  }
+
+  return <Redirect to="/login" />;
+};
+
+export default Profile;
+```
+
+### How to delete from app ?
+
+- Delete the _`amplifyContext.jsx`_ file from _`src/contexts`_ folder
+- If you use this, you should also remove the AuthContext file from the _`src/hooks/useAuth.js`_ file.
+- Remove the _`aws-exports.js`_ file & _`amplify`_ folder from the app root folder as well.
+- Remove the dependency _`aws-amplify`_
+
+### Reference
+
+- https://docs.amplify.aws/lib/project-setup/prereq/q/platform/js
+- https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js

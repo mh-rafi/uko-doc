@@ -1,0 +1,56 @@
+### How it work
+
+The wrapper component RTL is wrap the react app content tree. Install [stylis-plugin-rtl
+](https://www.npmjs.com/package/stylis-plugin-rtl) and [stylis](https://www.npmjs.com/package/stylis) package.
+
+```js RTL.jsx
+import { FC, useEffect } from "react";
+import createCache from "@emotion/cache";
+import { CacheProvider } from "@emotion/react";
+import { useTheme } from "@mui/material";
+import rtlPlugin from "stylis-plugin-rtl";
+import { prefixer } from "stylis";
+
+const RTL = ({ children }) => {
+  const theme = useTheme();
+
+  useEffect(() => {
+    document.dir = theme.direction;
+  }, [theme.direction]);
+
+  const cacheRTL = createCache({
+    key: theme.direction === "rtl" ? "rtl" : "css",
+    stylisPlugins: theme.direction === "rtl" ? [prefixer, rtlPlugin] : [],
+  });
+
+  cacheRTL.compat = true;
+
+  return <CacheProvider value={cacheRTL}>{children}</CacheProvider>;
+};
+
+export default RTL;
+```
+
+### Usage
+
+```js App.jsx
+const App = () => {
+  return (
+    <RTL>
+      <Component />
+    </RTL>
+  );
+};
+
+export default App;
+```
+
+### How to remove RTL?
+
+- Delete rtl folder (_`src/components/rtl`_) from components folder
+- Delete RTL component from _`src/App.jsx`_ component. `(In nextjs version remove from src/app/layout.jsx)`
+- Uninstall dependecies [stylis-plugin-rtl](https://www.npmjs.com/package/stylis-plugin-rtl) and [stylis](https://www.npmjs.com/package/stylis)
+
+### Reference
+
+- https://mui.com/material-ui/guides/right-to-left/#opting-out-of-rtl-transformation

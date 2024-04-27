@@ -1,0 +1,86 @@
+### Uko Sidebar Navigation Structure
+
+- You can find the navigation file from _`layouts/layout-parts/navigation.jsx`_
+
+```js navigation.jsx
+const navigations = [
+  // Navigation Heading Level
+  { type: "label", label: "Dashboard" },
+
+  // Navigation Item
+  {
+    name: "Analytics 1",
+    path: "/dashboard",
+    icon: duotone.PersonChalkboard,
+  },
+
+  { type: "label", label: "Management" },
+
+  // Navigation Item with Children
+  {
+    name: "Users",
+    icon: duotone.UserList,
+    children: [
+      { name: "Add User", path: "/dashboard/users/add-user" },
+      { name: "User List 1", path: "/dashboard/users/user-list-1" },
+      { name: "User Grid 1", path: "/dashboard/users/user-grid-1" },
+      { name: "User List 2", path: "/dashboard/users/user-list-2" },
+      { name: "User Grid 2", path: "/dashboard/users/user-grid-2" },
+    ],
+  },
+
+  // Navigation Item with permission
+  {
+    access: "admin",
+    name: "Analytics 1",
+    path: "/dashboard",
+    icon: duotone.PersonChalkboard,
+  },
+
+  // Navigation Item with External Link
+  {
+    type: "extLink",
+    name: "Documentation",
+    icon: duotone.FileCircleQuestion,
+    path: "https://uko-react-doc.vercel.app/",
+  },
+
+  // Disable Navigation Item
+  {
+    path: "https://uko-react-doc.vercel.app",
+    name: "Item Disabled",
+    icon: duotone.Folder,
+    disabled: true,
+  },
+
+  // Navigation Item with Multi Level Children
+  {
+    name: "Multi Level Item",
+    icon: duotone.Apps,
+    children: [
+      {
+        name: "Level A",
+        path: "/level-a",
+      },
+      {
+        iconText: "B",
+        name: "Level B",
+        children: [
+          {
+            name: "Level B1",
+            path: "/level-b1",
+          },
+          {
+            iconText: "B",
+            name: "Level B2",
+            children: [
+              { name: "Level B21", path: "/level-b21" },
+              { name: "Level B22", path: "/level-b22" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+```

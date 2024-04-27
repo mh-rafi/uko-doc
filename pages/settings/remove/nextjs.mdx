@@ -1,0 +1,95 @@
+### How to remove site settings from app?
+
+- At first, Remove _`SettingsProvider`_ wrapper component from _`src/app/layout.jsx`_ file.
+- After that, Remove _`useSettings`_ hook & settings argument from _`createCustomTheme`_ function
+- After that, Copy the code from below [step-3](#step-3) and paste it _`createCustomTheme`_ function
+
+### Step 1
+
+```jsx src/app/layout.jsx mark=5,7
+const RootLayout = ({ children }) => {
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        {/** <SettingsProvider> */}
+        {children}
+        {/** </SettingsProvider> */}
+      </body>
+    </html>
+  );
+};
+
+export default RootLayout;
+```
+
+### Step 2
+
+```js src/theme/ThemeProvider.jsx mark=2,3
+const ThemeProvider = ({ children }) => {
+  //   const { settings } = useSettings();
+  //   const theme = createCustomTheme(settings);
+
+  const theme = createCustomTheme();
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  );
+};
+
+export default ThemeProvider;
+```
+
+### Step 3
+
+```js theme/createTheme.js mark=34:46,3:30
+// REMOVE THIS CODE
+
+// export const createCustomTheme = (settings) => {
+//   /**
+//    * settings.theme value is 'light' or 'dark'
+//    * update settings in contexts/settingsContext.jsx
+//    */
+//   let themeOptions = themesOptions[settings.theme];
+
+//   if (!themeOptions) {
+//     themeOptions = themesOptions[THEMES.LIGHT];
+//   }
+
+//   const mergedThemeOptions = merge({}, baseOptions, themeOptions, {
+//     direction: settings.direction,
+//   });
+
+//   let theme = createTheme(mergedThemeOptions as ThemeOptions);
+
+//   // set shadows
+//   theme.shadows = shadows(theme);
+//   // set components
+//   theme.components = componentsOverride(theme);
+
+//   if (settings.responsiveFontSizes) {
+//     theme = responsiveFontSizes(theme);
+//   }
+
+//   return theme;
+// };
+
+// ADD THIS CODE
+
+export const createCustomTheme = () => {
+  let themeOptions = themesOptions[THEMES.LIGHT];
+
+  const mergedThemeOptions = merge({}, baseOptions, themeOptions);
+
+  let theme = createTheme(mergedThemeOptions);
+
+  // set shadows
+  theme.shadows = shadows(theme);
+  // set components
+  theme.components = componentsOverride(theme);
+
+  return theme;
+};
+```

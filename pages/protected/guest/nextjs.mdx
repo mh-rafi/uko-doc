@@ -1,0 +1,36 @@
+### How to work ?
+
+Sometimes you may want to make certain routes, such as /register, /login, etc., only accessible to users who are not authenticated. You can use the _`GuestGuard`_ component to direct users to a specific route/page (/dashboard) by using it.
+
+```js GuestGuard.jsx
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import useAuth from "hooks/useAuth";
+
+const GuestGuard = ({ children }) => {
+  const router = useRouter();
+  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    if (isAuthenticated) router.replace("/dashboard");
+  }, [isAuthenticated]);
+
+  return <>{children}</>;
+};
+
+export default GuestGuard;
+```
+
+### How to use it ?
+
+```js layout.jsx
+import { GuestGuard } from "components/auth";
+
+const AuthLayout = ({ children }) => {
+  return <GuestGuard>{children}</GuestGuard>;
+};
+
+export default AuthLayout;
+```

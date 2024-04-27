@@ -1,0 +1,89 @@
+<iframe
+  width="100%"
+  height="400"
+  src="https://www.youtube.com/embed/R-mof21masE"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
+
+### How to use Auth0 ?
+
+_`Note:`_ The uko template uses the firebase authentication system by default.
+
+- [Step-1](#step-1) : Sign up for an account on [Auth0](https://auth0.com/signup). After that, get the _`client id and domain`_ from the dashboard and put them in the _`.env`_ file.
+
+- [Step-2](#step-2) : Open the _`src/hooks/useAuth.js`_ file. Thereupon, import the AuthContext from _`src/contexts/auth0Context`_ then pass it as an argument in the useContext hook.
+
+- [Step-3](#step-3) : Call the useAuth hook inside AuthGuard, GuestGuard components, Login, Register page etc.
+
+### Step 1
+
+```
+REACT_APP_AUTH0_CLIENT_ID= SET YOUR CLIENT ID
+REACT_APP_AUTH0_DOMAIN= SET YOUR DOMAIN
+```
+
+### Step 2
+
+```js mark=1,3[34:44]
+import { AuthContext } from "contexts/auth0Context";
+
+const useAuth = () => useContext(AuthContext);
+export default useAuth;
+```
+
+### Step 3
+
+```js login.jsx
+import useAuth from "hooks/useAuth";
+
+const Login = () => {
+  const { loginloginWithPopup } = useAuth();
+
+  const onLogin = async () => {
+    await loginWithPopup();
+  };
+
+  return (
+    <Box>
+      <Button onClick={onLogin}>Login</Button>
+    </Box>
+  );
+};
+
+export default Login;
+```
+
+```js profile.jsx
+import useAuth from "hooks/useAuth";
+
+const Profile = () => {
+  const { user, isAuthenticated, logout } = useAuth();
+
+  if (isAuthenticated && user) {
+    return (
+      <Box>
+        <Typography>Email : {user.email}</Typography>
+        <Button onClick={logout}>logout</Button>
+      </Box>
+    );
+  }
+
+  return <Redirect to="/login" />;
+};
+
+export default Profile;
+```
+
+### How to delete from app ?
+
+- Delete the _`auth0Context.jsx`_ file from _`src/contexts`_ folder
+- You should also delete the AuthContext file from the _`src/hooks/useAuth.js`_ file if you use this.
+- Also delete the REACT_APP_AUTH0_CLIENT_ID & REACT_APP_AUTH0_DOMAIN from `.env` file.
+- Uninstall dependecies [@auth0/auth0-spa-js](https://www.npmjs.com/package/@auth0/auth0-spa-js)
+
+### Reference
+
+- https://auth0.com/docs/libraries/auth0-single-page-app-sdk

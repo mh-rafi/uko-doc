@@ -1,0 +1,6 @@
+{
+  "jwt": "JWT",
+  "firebase": "Firebase",
+  "auth0": "Auth0",
+  "amplify": "AWS Amplify"
+}

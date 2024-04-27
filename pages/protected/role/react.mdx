@@ -1,0 +1,38 @@
+### How to work it ?
+
+Sometime we have a list of routes for specific user roles, such as admin, user, editor, etc. In this case, we want to show the role based routes permission then we can use RoleBasedGuard component from app.
+
+```js RoleBasedGuard.jsx
+import useAuth from "hooks/useAuth";
+
+const RoleBasedGuard = ({ children, roles }) => {
+  const { user } = useAuth();
+
+  const loggedInUserRole = user?.role;
+
+  if (loggedInUserRole && roles.includes(loggedInUserRole)) {
+    return <>{children || <Outlet />}</>;
+  }
+
+  return <ErrorView />;
+};
+
+export default RoleBasedGuard;
+```
+
+```js routes.js
+import { RoleBasedGuard } from "components/auth";
+
+const routes = () => {
+  return [
+    {
+      path: "users",
+      element: (
+        <RoleBasedGuard roles={["editor", "user", "admin"]}>
+          <UserList />
+        </RoleBasedGuard>
+      ),
+    },
+  ];
+};
+```

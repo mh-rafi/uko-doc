@@ -1,0 +1,217 @@
+### Folder structure
+
+> Finding what you need is made simpler by a clear and simple folder structure. The folder structure can be found in the directory `uko-dashboard/`
+
+- _`pulic/`_ : Get all static files, such as JPGs, PNGs SVGs, and PDFs, inside of this folder.
+
+- _`src/__fakeData__/`_ : Get all of the project's data, including the users, products, and invoice table data, that are stored in this folder.
+
+- _`src/components/`_: On the entire project, we wrote a lot of reusable components. From this folder, all reusable components were taken.
+
+- _`src/contexts/`_ : All global contexts exist in this folder such as settingsContext (for site settings), jwtContext (for authentication).
+
+- _`src/hooks/`_ : From this folder, all global hooks are located. such as useSettings (for site settings) and useAuth (for authentication).
+
+- _`src/icons/`_ : Many icon components were used throughout the entire project. This folder contains all of the icon components.
+
+- _`src/layouts/`_ : On the entire project, two layouts were used: one was the main layout (all public pages), and the other was the dashboard layout (pages related to the dashboard).
+
+- _`src/page-sections/`_ : There were more than 50 pages total in the project, and inside each page's section (components, styled components, and hooks) were pre-existing and based on the page name. As example, for profile page `page-sections/profile/`
+
+- _`src/pages/`_ : The project included more than 50 pages in total; all of the pages' files were collected in this folder.
+
+- _`src/routes/`_ : Only React projects that need a routing system have a routes folder. Get from here for all route configurations.
+
+- _`src/theme/`_ : The project theme setup, theme options, and mui override components are located from here.
+
+- _`src/utils/`_ : A few unique, reusable Utlis methods that were all obtained from this folder were used throughout the entire project.
+
+```
+uko-dashboard/
+├── public/
+|   ├── static/
+|   |   ├── avatar
+|   |   ├── browser
+|   |   ├── files-icon
+|   |   ├── illustration
+|   |   ├── payment
+|   |   ├── products
+|   |   ├── some more folders
+|   └── and some files
+|   |
+├── src/
+|   ├── __fakeData__/
+|   |   ├── admin/
+|   |   ├   └── worldMap.json
+|   |   ├── chats.js
+|   |   ├── data-tables.js
+|   |   ├── invoices.js
+|   |   ├── products.js
+|   |   ├── users.js
+|   |
+|   ├── components/
+|   |   ├── auth
+|   |   ├   ├── index.js
+|   |   ├   ├── AuthGuard.jsx
+|   |   ├   ├── GuestGuard.jsx
+|   |   ├   └── RoleBasedGuard.jsx
+|   |   ├── avatar-badge
+|   |   ├   ├── index.js
+|   |   ├   └── AvatarBadge.jsx
+|   |   ├── avatar-loading
+|   |   ├   ├── index.js
+|   |   ├   └── AvatarLoading.jsx
+|   |   ├── block
+|   |   ├   ├── index.js
+|   |   ├   └── Block.jsx
+|   |   ├── carousel
+|   |   ├   ├── index.js
+|   |   ├   └── Carousel.jsx
+|   |   └── few more folders
+|   |
+|   ├── contexts/
+|   |   ├── amplifyContext.js
+|   |   ├── auth0Context.js
+|   |   ├── firebaseContext.js
+|   |   ├── jwtContext.js
+|   |   ├── settingsContext.js
+|   |
+|   ├── hooks/
+|   |   ├── useAuth.js
+|   |   ├── useLocalStorage.js
+|   |   ├── useMuiTable.js
+|   |   ├── useSettings.js
+|   |
+|   ├── icons/
+|   |   ├── Add.jsx
+|   |   ├── Apps.jsx
+|   |   ├── Birthday.jsx
+|   |   ├── Call.jsx
+|   |   ├── some more jsx files
+|   |
+|   ├── layouts/
+|   |   ├── layouts-parts/
+|   |   |   ├── popovers/
+|   |   |   └── styles/
+|   |   |
+|   |   |   ├── LayoutBodyWrapper.jsx
+|   |   |   ├── LayoutDrawer.jsx
+|   |   |   ├── navigation.jsx
+|   |   |   ├── SearchBar.js
+|   |   |   └── UserAccount.js
+|   |   |
+|   |   ├── dashboard/
+|   |   |   └── context/
+|   |   |   |   ├── useLayout.jsx
+|   |   |   |   ├── layoutContext.jsx
+|   |   |   |
+|   |   |   ├── DashboardHeader.jsx
+|   |   |   ├── DashboardLayout.jsx
+|   |   |   ├── DashboardSidebar.jsx
+|   |   |   ├── MobileSidebar.jsx
+|   |   |   ├── MultiLevelMenu.jsx
+|   |   |   └── SidebarAccordion.jsx
+|   |   |
+|   |   ├── main/
+|   |   |   └── menu/
+|   |   |   |   ├── MegaMenu.jsx
+|   |   |   |   ├── MegaMenuList.jsx
+|   |   |   |
+|   |   |   ├── Footer.jsx
+|   |   |   ├── Header.jsx
+|   |   |   ├── MainLayout.jsx
+|   |
+|   ├── page-sections/
+|   |   ├── about-us/
+|   |   ├── accounts/
+|   |   ├── career/
+|   |   ├── chat/
+|   |   ├── checkout/
+|   |   ├── coming-soon/
+|   |   ├── contact-us/
+|   |   ├── dashboards/
+|   |   ├── data-tables/
+|   |   ├── ecommerce/
+|   |   ├── email/
+|   |   ├── error/
+|   |   ├── products/
+|   |   ├── sessions/
+|   |   ├── more folders based on the names of the pages
+|   |
+|   ├── pages/
+|   |   ├── about-us/
+|   |   |   ├── about-us-1.jsx
+|   |   |   ├── about-us-2.jsx
+|   |   |
+|   |   ├── career/
+|   |   |   ├── apply.jsx
+|   |   |   ├── career-1.jsx
+|   |   |   ├── career-2.jsx
+|   |   |
+|   |   ├── dashboard/
+|   |   |   ├── users/
+|   |   |   |   ├── add-new-user.jsx
+|   |   |   |   ├── user-list-1.jsx
+|   |   |   |   ├── user-list-2.jsx
+|   |   |   |   ├── user-grid-1.jsx
+|   |   |   |   ├── user-grid-2.jsx
+|   |   |   |
+|   |   |   ├── products/
+|   |   |   |   ├── create.jsx
+|   |   |   |   ├── details.jsx
+|   |   |   |   ├── grid.jsx
+|   |   |   |   ├── list.jsx
+|   |   |   |
+|   |   |   ├── more folders based on the names of the dashboard pages
+|   |   |   |
+|   |   |   ├── analytics.jsx
+|   |   |   ├── analytics-v2.jsx
+|   |   |   ├── crm.jsx
+|   |   |   ├── ecommerce.jsx
+|   |   |   ├── finance.jsx
+|   |   |   ├── finance-v2.jsx
+|   |   |   ├── logistics.jsx
+|   |   |   ├── marketing.jsx
+|   |   |
+|   |   ├── 404.jsx
+|   |   ├── checkout.jsx
+|   |   ├── coming-soon.jsx
+|   |   ├── contact-us.jsx
+|   |   ├── faq.jsx
+|   |   ├── maintennance.jsx
+|   |   ├── permission.jsx
+|   |   ├── pricing.jsx
+|   |
+|   ├── routes/
+|   |   ├── auth.jsx
+|   |   ├── components.jsx
+|   |   ├── dashboard.jsx
+|   |   ├── public.jsx
+|   |   ├── index.jsx
+|   |
+|   ├── theme/
+|   |   ├── components/
+|   |   |   ├── accordion.js
+|   |   |   ├── alert.js
+|   |   |   ├── avatar.js
+|   |   |   ├── button.js
+|   |   |   ├── some more files
+|   |   |
+|   |   ├── colors.js
+|   |   ├── index.js
+|   |   ├── shadows.js
+|   |   └── themeOptions.js
+|   |
+|   ├── utils/
+|   |   ├── baseChartOptions.js
+|   |   ├── constant.js
+|   |   ├── currency.js
+|   |   ├── numberFormat.js
+|   |
+|   ├── App.jsx
+|   ├── i18n.js
+|   ├── index.js
+|   ├── routes.js
+|   |
+└── README.md
+```

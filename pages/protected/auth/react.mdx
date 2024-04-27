@@ -1,0 +1,38 @@
+### How to work ?
+
+A private route can be protected using this _`AuthGuard`_ component. It decides whether to permit navigation to a requested route.
+
+```js AuthGuard.jsx
+import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "hooks/useAuth";
+
+const AuthGuard = ({ children }) => {
+  const { pathname } = useLocation();
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) return <>{children}</>;
+
+  return <Navigate replace to="/login" state={{ from: pathname }} />;
+};
+
+export default AuthGuard;
+```
+
+### How to use it ?
+
+```js routes.js
+import { AuthGuard } from "components/auth";
+
+const routes = () => {
+  return [
+    {
+      path: "dashboard",
+      element: (
+        <AuthGuard>
+          <Dashboard />
+        </AuthGuard>
+      ),
+    },
+  ];
+};
+```

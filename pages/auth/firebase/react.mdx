@@ -1,0 +1,104 @@
+### How to use Firbase ?
+
+_`Note:`_ The uko template uses the firebase authentication system by default.
+
+- [Step-1](#step-1) : Visit [Google Console](https://console.firebase.google.com). Create a project next, then gather configuration data from it and add it to the _`.env`_ file.
+
+- [Step-2](#step-2) : Open the _`src/App.jsx`_ file then import the AuthProvider from _`contexts/firebaseContext`_ and wrap the App component with it.
+
+- [Step-3](#step-3) : Open the _`src/hooks/useAuth.js`_ file. Thereupon, import the AuthContext from _`src/contexts/firebaseContext`_ then pass it as an argument in the useContext hook.
+
+- [Step-4](#step-4) : Call the useAuth hook inside AuthGuard, GuestGuard components, Login, Register page etc.
+
+### Step 1
+
+```
+REACT_APP_FIREBASE_APT_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_DATABASE_URL=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_APP_ID=
+REACT_APP_FIREBASE_MEASUREMENT_ID=
+```
+
+### Step 2
+
+```js App.jsx mark=1,5,7
+import { AuthProvider } from "contexts/firebaseContext";
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <Component />
+    </AuthProvider>
+  );
+};
+
+export default App;
+```
+
+### useAuth.js Step 3
+
+```js mark=1,3[34:44]
+import { AuthContext } from "contexts/firebaseContext";
+
+const useAuth = () => useContext(AuthContext);
+export default useAuth;
+```
+
+### Step 4
+
+```js login.jsx
+import useAuth from "hooks/useAuth";
+
+const Login = () => {
+  const { signInWithEmail, signInWithGoogle } = useAuth();
+
+  const onLogin = async () => {
+    await signInWithEmail("example@email.com", "pass123"); // Login crediential
+  };
+
+  return (
+    <Box>
+      <Button onClick={onLogin}>Login</Button>
+      <Button onClick={signInWithGoogle}>Login with Google</Button>
+    </Box>
+  );
+};
+
+export default Login;
+```
+
+```js profile.jsx
+import useAuth from "hooks/useAuth";
+
+const Profile = () => {
+  const { user, isAuthenticated, logout } = useAuth();
+
+  if (isAuthenticated && user) {
+    return (
+      <Box>
+        <Typography>Email : {user.email}</Typography>
+        <Button onClick={logout}>logout</Button>
+      </Box>
+    );
+  }
+
+  return <Redirect to="/login" />;
+};
+
+export default Profile;
+```
+
+### How to delete from app ?
+
+- Delete the _`firebaseContext.jsx`_ file from _`src/contexts`_ folder
+- If you use this, you should also remove the AuthContext file from the _`src/hooks/useAuth.js`_ file.
+- Remove the CONFIG OPTIONS from the _`.env`_ file as well.
+- Remove the dependency _`firebase`_
+
+### Reference
+
+- https://firebase.google.com/docs/auth/web/start

@@ -1,0 +1,45 @@
+### Default Settings
+
+```js contexts/settingsContext.jsx
+const initialSettings = {
+  direction: "ltr",
+  theme: THEMES.LIGHT,
+  responsiveFontSizes: true,
+};
+```
+
+### How to change settings?
+
+Want to change the settings context inside _`src/contexts/settingsContext`_
+
+```jsx contexts/settingsContext.jsx
+import { createContext } from "react";
+import { THEMES } from "utils/constants";
+import useLocalStorage from "hooks/useLocalStorage";
+
+const initialSettings = {
+  direction: "ltr",
+  theme: THEMES.LIGHT,
+  responsiveFontSizes: true,
+};
+
+export const SettingsContext = createContext({
+  settings: initialSettings,
+  saveSettings: (arg) => {},
+});
+
+const SettingsProvider = ({ children }) => {
+  const storage = useLocalStorage("settings", initialSettings);
+  const { data: settings, storeData: setStoreSettings } = storage;
+
+  const saveSettings = (updateSettings) => setStoreSettings(updateSettings);
+
+  return (
+    <SettingsContext.Provider value={{ settings, saveSettings }}>
+      {children}
+    </SettingsContext.Provider>
+  );
+};
+
+export default SettingsProvider;
+```

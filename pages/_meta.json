@@ -1,0 +1,14 @@
+{
+  "index": "Quick Start",
+  "folder-structure": "Folder Structure",
+  "env": "Environment Variable",
+  "navigation": "Sidebar Navigation",
+  "routing": "Routing",
+  "theme": "Theme",
+  "settings": "Site Settings",
+  "auth": "Authentication",
+  "protected": "Route Guard",
+  "rtl": "RTL",
+  "i18n": "Internationalization",
+  "dependency": "Dependencies"
+}

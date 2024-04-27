@@ -1,0 +1,62 @@
+### Route Configuration
+
+The routing is based on the [react-router-dom](https://reactrouter.com/en/main). You can find all routes inside this file _`src/routes/index.js`_. Uko routing system uses code splitting for improved performance.
+
+```js routes.js
+const routes = () => {
+  return [
+    // INITIAL / INDEX PAGE
+    { path: "/", element: <Landing /> },
+
+    // GLOBAL ERROR PAGE
+    { path: "*", element: <ErrorPage /> },
+
+    // AUTHENTICATION PAGES ROUTES & DIFFERENT AUTH DEMO PAGES ROUTES
+    ...AuthRoutes,
+
+    // COMPONENTS PAGES ROUTES
+    ...ComponentRoutes,
+
+    // INSIDE DASHBOARD PAGES ROUTES
+    ...DashboardRoutes,
+
+    // PAGES ROUTES
+    ...PublicRoutes,
+  ];
+};
+
+// =======================================================================
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// ROUTER CREATE
+const router = createBrowserRouter(routes());
+
+const App = () => {
+  return <RouterProvider router={router} />;
+};
+```
+
+### How to add a new route?
+
+Open file `src/routes/index.jsx` and update the following file if you want to add more routes.
+
+```js routes/index.js mark=1,11
+const About = Loadable(lazy(() => import("pages/About")));
+
+const routes = () => {
+  return [
+    { path: "*", element: <ErrorPage /> },
+    { path: "/login", element: <Login /> },
+    { path: "/register", element: <Register /> },
+    { path: "/forget-password", element: <ForgetPassword /> },
+
+    // added new route
+    { path: "/about", element: <About /> },
+  ];
+};
+```
+
+### Reference
+
+- https://reactrouter.com/en/main

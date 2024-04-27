@@ -1,0 +1,31 @@
+### Typography
+
+You can install it by typing the below command in your terminal:
+
+```bash
+npm install @fontsource/inter
+```
+
+or
+
+```bash
+yarn add @fontsource/inter
+```
+
+```js theme/index.js
+import { createTheme } from "@mui/material";
+
+// font variants
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+
+let theme = createTheme({
+  typography: { fontFamily: "'Inter', sans-serif" },
+});
+```
+
+### Reference
+
+- https://mui.com/material-ui/react-typography/#install-with-npm

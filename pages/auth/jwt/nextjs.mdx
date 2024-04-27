@@ -1,0 +1,78 @@
+### How to use JWT authentication system ?
+
+_`Note:`_ The uko template uses the firebase authentication system by default.
+
+- [Step-1](#step-1) : Open the _`src/app/layout.jsx`_ file then import the AuthProvider from _`src/contexts/jwtContext`_ and wrap the Root Layout component with it.
+
+- [Step-2](#step-2) : Open the _`src/hooks/useAuth.js`_ file. Thereupon, import the AuthContext from _`src/contexts/jwtContext`_ then pass AuthContext as a argument in useContext hook.
+
+- [Step-3](#step-3) : Call the useAuth hook inside AuthGuard, GuestGuard components, Login, Register page etc.
+
+### Step 1
+
+```js layout.jsx mark=1,4
+import { AuthProvider } from "contexts/jwtContext";
+
+const RootLayout = ({ children }) => {
+  return <AuthProvider>{children}</AuthProvider>;
+};
+
+export default RootLayout;
+```
+
+### Step 2
+
+```js useAuth.js mark=1,3[34:44]
+import { AuthContext } from "contexts/jwtContext";
+
+const useAuth = () => useContext(AuthContext);
+export default useAuth;
+```
+
+### Step 3
+
+```js login.jsx
+import useAuth from "hooks/useAuth";
+
+const Login = () => {
+  const { login } = useAuth();
+
+  const onLogin = () => {
+    login("example@email.com", "pass123"); // Login crediential
+  };
+
+  return (
+    <Box>
+      <Button onClick={onLogin}>Login</Button>
+    </Box>
+  );
+};
+
+export default Login;
+```
+
+```js profile.jsx
+import useAuth from "hooks/useAuth";
+
+const Profile = () => {
+  const { user, isAuthenticated, logout } = useAuth();
+
+  if (isAuthenticated && user) {
+    return (
+      <Box>
+        <Typography>Email : {user.email}</Typography>
+        <Button onClick={logout}>logout</Button>
+      </Box>
+    );
+  }
+
+  return <Redirect to="/login" />;
+};
+
+export default Profile;
+```
+
+### How to delete from app ?
+
+- Delete the _`jwtContext.jsx`_ file from _`src/contexts`_ folder
+- In addition, if you use this, remove it from the _`src/hooks/useAuth.js`_ file.
