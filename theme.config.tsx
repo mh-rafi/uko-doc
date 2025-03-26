@@ -4,8 +4,8 @@ import React from "react";
 const config = {
   logo: (
     <>
-      <img src="/logo.svg" width="40px" alt="Onion Logo" />
-      <span className="nx-text-primary nx-font-medium nx-ml-2">Onion Documentation</span>
+      <img src="/logo.svg" width="40px" alt="Uko Logo" />
+      <span className="nx-text-primary nx-font-medium nx-ml-2">Uko Documentation</span>
     </>
   ),
   docsRepositoryBase: "https://support.ui-lib.com",
@@ -18,7 +18,7 @@ const config = {
 
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – Onion Admin Template"
+      titleTemplate: "%s – Uko Admin Template"
     };
   },
 
@@ -29,7 +29,7 @@ const config = {
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
       <link rel="icon" type="image/png" sizes="96x96" href="/favicon.ico" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
-      <title>Onion - Client & Admin Dashboard Documentation</title>
+      <title>Uko - Client & Admin Dashboard Documentation</title>
     </>
   ),
 
@@ -37,7 +37,7 @@ const config = {
     extraContent: (
       <a
         target="_blank"
-        href="https://onionui.com"
+        href="https://uko-react.vercel.app"
         style={{
           fontSize: 14,
           padding: ".6rem .8rem",

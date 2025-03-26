@@ -1,7 +1,7 @@
 {
-  "name": "onion-docs",
+  "name": "uko-docs",
   "version": "2.0.0",
-  "description": "Onion docs",
+  "description": "Uko docs",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uilibrary/onion-documentation"
+    "url": "git+https://github.com/uilibrary/uko-documentation"
   },
   "author": "Nabed Khan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/uilibrary/onion-documentation/issues"
+    "url": "https://github.com/uilibrary/uko-documentation/issues"
   },
-  "homepage": "https://onion-documentation.vercel.app",
+  "homepage": "https://uko-documentation.vercel.app",
   "dependencies": {
     "@code-hike/mdx": "^0.9.0",
     "next": "^13.0.6",
