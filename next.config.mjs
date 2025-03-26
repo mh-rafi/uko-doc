@@ -11,11 +11,11 @@ const withNextra = nextra({
         {
           lineNumbers: true,
           showCopyButton: true,
-          theme: "dracula",
-        },
-      ],
-    ],
-  },
+          theme: "dracula"
+        }
+      ]
+    ]
+  }
 });
 
 export default withNextra();

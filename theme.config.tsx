@@ -1,15 +1,11 @@
 import React from "react";
-import { DocsThemeConfig } from "nextra-theme-docs";
-import { Button } from "nextra/components";
+// import { DocsThemeConfig } from "nextra-theme-docs";
 
-const config: DocsThemeConfig = {
+const config = {
   logo: (
     <>
-      <img src="/logo.svg" width="40px" alt="Uko Logo" />
-
-      <span className="nx-text-primary nx-font-medium nx-ml-2">
-        Uko Documentation
-      </span>
+      <img src="/logo.svg" width="40px" alt="Onion Logo" />
+      <span className="nx-text-primary nx-font-medium nx-ml-2">Onion Documentation</span>
     </>
   ),
   docsRepositoryBase: "https://support.ui-lib.com",
@@ -17,12 +13,12 @@ const config: DocsThemeConfig = {
   editLink: { component: () => null },
   sidebar: { defaultMenuCollapseLevel: 1 },
   footer: {
-    text: <p className="nx-mx-auto">{new Date().getFullYear()} © UI Lib</p>,
+    text: <p className="nx-mx-auto">{new Date().getFullYear()} © UI Lib</p>
   },
 
   useNextSeoProps() {
     return {
-      titleTemplate: "%s – Uko Admin Template",
+      titleTemplate: "%s – Onion Admin Template"
     };
   },
 
@@ -30,12 +26,10 @@ const config: DocsThemeConfig = {
     <>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta httpEquiv="Content-Language" content="en" />
-
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
       <link rel="icon" type="image/png" sizes="96x96" href="/favicon.ico" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
-
-      <title>Uko - Client & Admin Dashboard Documentation</title>
+      <title>Onion - Client & Admin Dashboard Documentation</title>
     </>
   ),
 
@@ -43,7 +37,7 @@ const config: DocsThemeConfig = {
     extraContent: (
       <a
         target="_blank"
-        href="https://uko-react.vercel.app"
+        href="https://onionui.com"
         style={{
           fontSize: 14,
           padding: ".6rem .8rem",
@@ -51,13 +45,12 @@ const config: DocsThemeConfig = {
           border: "none",
           color: "#fff",
           borderRadius: 8,
-          lineHeight: 1,
-        }}
-      >
+          lineHeight: 1
+        }}>
         View Demo
       </a>
-    ),
-  },
+    )
+  }
 };
 
 export default config;
